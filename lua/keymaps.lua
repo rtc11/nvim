@@ -52,6 +52,7 @@ keymap('i', '<s-TAB>', '<C-d>', opts)
 keymap('x', 'p', [["_dP]])
 
 
+keymap("n", "<leader>gg", ":Neogit<CR>", { desc = "Open Neogit" })
 keymap('n', '-', '<CMD>Oil<CR>', { desc = "Open parent directory" })
 
 -- diagnostic 
