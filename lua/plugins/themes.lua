@@ -1,3 +1,10 @@
+return {
+    "rmehri01/onenord.nvim",
+    priority = 1000,
+    config = function()
+        vim.cmd.colorscheme "onenord"
+    end,
+}
 --[[
 return {
   "catppuccin/nvim",
@@ -17,7 +24,6 @@ return {
     vim.cmd.colorscheme 'onedark'
   end,
 }
---]]
 return {
   'AlexvZyl/nordic.nvim',
   lazy = false,
@@ -28,3 +34,5 @@ return {
     -- vim.cmd.colorscheme 'nordic'
   end
 }
+--]]
+
