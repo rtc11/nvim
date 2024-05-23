@@ -38,3 +38,10 @@ vim.opt.cursorline = true                        -- Enable highlighting of the c
 vim.opt.fileencoding = "utf-8"                   -- The encoding written to file
 vim.opt.cmdheight = 1                            -- More space for displaying messages
 vim.opt.showcmd = false                          -- Don't show extra info when using completion
+
+vim.opt.formatoptions = vim.opt.formatoptions
+   + "c" -- Auto-wrap comments using textwidth
+   - "o" -- O and o, don't continue comments
+   - "r" -- Automatically insert the comment leader after hitting <Enter> in INSERT mode
+   + "j" -- Remove comment leader when joining lines
+

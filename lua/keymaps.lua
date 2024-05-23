@@ -56,8 +56,6 @@ keymap('i', '<s-TAB>', '<C-d>', opts)
 -- when yanking a word, you can replace word under cursor [vep]
 keymap('x', 'p', [["_dP]])
 
-
-
 -- diagnostic 
 keymap('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 keymap('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
