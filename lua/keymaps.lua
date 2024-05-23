@@ -4,7 +4,6 @@
 -- :vmap
 -- :imap
 
---
 local keymap = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
@@ -14,11 +13,17 @@ keymap({ 'n', 'v' }, '<Space>', '<Nop>', opts)
 --keymap('n', '<C-d>', '<C-d>zz', opts)               -- move cursor centered when scrolling
 --keymap('n', '<C-u>', '<C-u>zz', opts)               -- move cursor centered when scrolling
 
+keymap('n', '<leader>.', ':cd %:p:h<CR>',  { desc = 'set current working directory' })
+
 keymap('v', 'J', ":m '>+1<CR>gv=gv", opts)          -- move selected (v mode) down
 keymap('v', 'K', ":m '<-2<CR>gv=gv", opts)          -- move selected (v mode) up
 
 keymap({'n', 'o', 'x'}, '<s-h>', '^', opts)         -- move to end of line
 keymap({'n', 'o', 'x'}, '<s-l>', 'g_', opts)        -- move to start of line
+
+
+keymap('n', '<leader>rl', '<cmd>.lua<CR>', {desc = '[R]un the current [L]ine'})     -- run lua code
+keymap('n', '<leader>rf', '<cmd>source %<CR>', {desc = '[R]un the current [F]ile'})     -- run lua code
 
 -- tabs
 keymap('n', '<C-t>q', ':tabclose<CR>', { desc = 'Close tab' })
@@ -52,8 +57,6 @@ keymap('i', '<s-TAB>', '<C-d>', opts)
 keymap('x', 'p', [["_dP]])
 
 
-keymap("n", "<leader>gg", ":Neogit<CR>", { desc = "Open Neogit" })
-keymap('n', '-', '<CMD>Oil<CR>', { desc = "Open parent directory" })
 
 -- diagnostic 
 keymap('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })

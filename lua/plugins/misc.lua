@@ -7,5 +7,12 @@ return {
     {
         "folke/neodev.nvim",
         opts = {}
+    },
+
+    {
+        'junegunn/vim-easy-align',
+        config = function()
+            vim.keymap.set('x', 'ga', ':EasyAlign', { noremap = false })
+        end
     }
 }

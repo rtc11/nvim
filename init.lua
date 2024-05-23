@@ -15,10 +15,6 @@ require("options")
 require("lazy").setup("plugins")
 require("keymaps")
 
---merlin setup for ocaml
---local opam_share = vim.fn.system { 'opam',  'var',  'share', }
---vim.opt.rtp:prepend(opam_share .. '/merlin/vim')
-
 -- See :help vim.highlight.on_yank()
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', {clear = true})
 vim.api.nvim_create_autocmd('TextYankPost', {

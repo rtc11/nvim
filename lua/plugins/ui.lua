@@ -1,4 +1,8 @@
 return {
+    -- 
+    --  show indent lines
+    -- 
+    { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
     --
     -- Bottom-left text notifications
     --

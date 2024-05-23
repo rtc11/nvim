@@ -1,14 +1,18 @@
-vim.g.mapleader = ' '                            -- use <space> as leader key
+vim.g.mapleader = ' ' -- use <space> as leader key
 vim.g.maplocalleader = ' '
 
-vim.wo.number = true                             -- Make line numbers default
-vim.wo.relativenumber = true                     -- show relative numbers
-vim.wo.signcolumn = 'yes'                        -- Keep signcolumn on by default
-vim.wo.wrap = false                              -- Don't wrap lines
+vim.wo.number = true         -- Make line numbers default
+vim.wo.relativenumber = true -- show relative numbers
+vim.wo.signcolumn = 'yes'    -- Keep signcolumn on by default
+vim.wo.wrap = false          -- Don't wrap lines
 
-vim.opt.expandtab = true                         -- expand <tab> to spaces in INSERT mode
-vim.opt.autoindent = true                        -- automatically set the indent of a new line
-vim.opt.smartindent = true                       -- do clever autoindent
+vim.opt.inccommand = "split" -- Incremental live completion
+vim.opt.splitbelow = true    -- Horizontal splits will automatically be below
+vim.opt.splitright = true    -- Vertical splits will automatically be to the right
+
+vim.opt.expandtab = true     -- expand <tab> to spaces in INSERT mode
+vim.opt.autoindent = true    -- automatically set the indent of a new line
+vim.opt.smartindent = true   -- do clever autoindent
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.backspace = { "indent", "eol", "start" } -- specifies what <backspace>, <ctrl w> etc can do in INSERT mode
@@ -24,7 +28,7 @@ vim.opt.timeout = true
 vim.opt.timeoutlen = 1000                        -- time to wait for a mapped sequence to complete (ms)
 vim.opt.completeopt = 'menuone,noselect'         -- Set completeopt to have a better completion experience
 vim.opt.termguicolors = true                     -- NOTE: You should make sure your terminal supports this
-vim.opt.guicursor = "" -- "a:blinkon0"
+vim.opt.guicursor = ""                           -- "a:blinkon0"
 vim.opt.showtabline = 1                          -- Tabline
 vim.opt.title = true                             -- Set the title of window to the value of the titlestring
 vim.opt.scrolloff = 8                            -- Lines of context

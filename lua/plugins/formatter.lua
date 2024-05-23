@@ -43,6 +43,16 @@ return {
             }
           end
         },
+        go = {
+            require('formatter.filetypes.go'),
+            function()
+              return {
+                exe = 'gofmt',
+                stdin = true,
+                args = { '-s' },
+              }
+            end
+        },
         toaml = {
           require('formatter.filetypes.toml'),
           function()

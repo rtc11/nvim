@@ -82,6 +82,11 @@ return {
             }
         })
 
+        lspconfig['gopls'].setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
+        })
+
         lspconfig['ocamllsp'].setup({
             capabilities = capabilities,
             on_attach = on_attach
@@ -90,10 +95,11 @@ return {
         lspconfig['kotlin_language_server'].setup({
             capabilities = capabilities,
             on_attach = on_attach,
+            --root_dir = lspconfig.util.root_pattern("*.kt"),
             root_dir = lspconfig.util.root_pattern("settings.gradle.kts", "buildk.toml"),
-            --init_options = {
-            --    storagePath = "/Users/robin/.config/kotlin-language-server/",
-            --}
+            init_options = {
+                storagePath = "/Users/robin/.config/kotlin-language-server/"
+            }
         })
 
         lspconfig['gleam'].setup({
