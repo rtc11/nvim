@@ -9,10 +9,6 @@ local opts = { noremap = true, silent = true }
 
 keymap({ 'n', 'v' }, '<Space>', '<Nop>', opts)
 
--- movement
---keymap('n', '<C-d>', '<C-d>zz', opts)               -- move cursor centered when scrolling
---keymap('n', '<C-u>', '<C-u>zz', opts)               -- move cursor centered when scrolling
-
 keymap('n', '<leader>.', ':cd %:p:h<CR>',  { desc = 'set current working directory' })
 
 keymap('v', 'J', ":m '>+1<CR>gv=gv", opts)          -- move selected (v mode) down
@@ -21,10 +17,6 @@ keymap('v', 'K', ":m '<-2<CR>gv=gv", opts)          -- move selected (v mode) up
 keymap({'n', 'o', 'x'}, '<s-h>', '^', opts)         -- move to end of line
 keymap({'n', 'o', 'x'}, '<s-l>', 'g_', opts)        -- move to start of line
 
-
-keymap('n', '<leader>rl', '<cmd>.lua<CR>', {desc = '[R]un the current [L]ine'})     -- run lua code
-keymap('n', '<leader>rf', '<cmd>source %<CR>', {desc = '[R]un the current [F]ile'})     -- run lua code
-
 -- tabs
 keymap('n', '<C-t>q', ':tabclose<CR>', { desc = 'Close tab' })
 keymap('n', '<C-c>o', ':tabonly<CR>', { desc = 'Close other tabs' })
@@ -32,8 +24,8 @@ keymap('n', '<C-t>s', ':tab sball<CR>', { desc = 'Open all buffers in tabs' })
 keymap('n', '<C-t>h', ':tabprev<CR>', { desc = 'Previous tab' })
 keymap('n', '<C-t>l', ':tabnext<CR>', { desc = 'Next tab' })
 
-keymap('n', '<C-b>h', ':bnext<CR>', { desc = "Next buffer"})
-keymap('n', '<C-b>l', ':bprevious<CR>', { desc = "Previous buffer"})
+-- keymap('n', '<C-b>h', ':bnext<CR>', { desc = "Next buffer"})
+-- keymap('n', '<C-b>l', ':bprevious<CR>', { desc = "Previous buffer"})
 
 -- Remap for dealing with word wrap
 keymap('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })

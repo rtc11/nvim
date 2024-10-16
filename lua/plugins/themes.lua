@@ -1,38 +1,56 @@
+-- set the colorscheme in init.lua
 return {
-    "rmehri01/onenord.nvim",
-    priority = 1000,
-    config = function()
-        vim.cmd.colorscheme "onenord"
-    end,
+    {
+        "scottmckendry/cyberdream.nvim",
+        -- lazy = false,
+        priority = 1000,
+        opts = {
+            transparent = true,
+        }
+    },
+    {
+        "folke/tokyonight.nvim",
+        priority = 1000,
+        opts = {
+            style = "night",
+        }
+    },
+    {
+        "rmehri01/onenord.nvim",
+        priority = 1000,
+        opts = {
+            disable = {
+                background = true,
+            }
+        }
+    },
+    {
+        "catppuccin/nvim",
+        name = "catppuccin",
+        priority = 1000
+    },
+    {
+        'navarasu/onedark.nvim',
+        priority = 1000
+    },
+    {
+        'AlexvZyl/nordic.nvim',
+        priority = 1000,
+        opts = {
+            swap_background = true,
+            transparent_bg = true,
+        }
+    },
+    {
+        "owickstrom/vim-colors-paramount",
+        priority = 1000,
+    },
+    {
+        "Patagia/dieter.nvim",
+        priority = 1000,
+    },
+    {
+        "Calder-Ty/Monocle.nvim",
+        priority = 1000,
+    }
 }
---[[
-return {
-  "catppuccin/nvim",
-  lazy = false,
-  name = "catppuccin",
-  priority = 1000,
-  config = function ()
-    vim.cmd.colorscheme "catppuccin"
-  end
-}
---]]
---[[
-return {
-  'navarasu/onedark.nvim',
-  priority = 1000,
-  config = function()
-    vim.cmd.colorscheme 'onedark'
-  end,
-}
-return {
-  'AlexvZyl/nordic.nvim',
-  lazy = false,
-  priority = 1000,
-  config = function()
-    require('nordic').load()
-    -- or 
-    -- vim.cmd.colorscheme 'nordic'
-  end
-}
---]]
-

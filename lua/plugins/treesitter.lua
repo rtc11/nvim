@@ -2,21 +2,30 @@
 return {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
-    --opts = {
-    --    highlight = { enable = true },
-    --    indent = { enable = true },
-    --    auto_install = true,
-    --},
     config = function()
-        require('nvim-treesitter.configs').setup {
-            auto_install = true,
-            highlight = {
-                enable = true,
-            },
-            indent = {
-                enable = false,
-            },
-        }
+        local config = require("nvim-treesitter.configs")
+        config.setup({
+            auto_install = false,
+            ignore_install = { "cpp" },
+            sync_install = true,
+            highlight = { enable = true },
+            indent = { enable = true },
+            ensure_installed  = {
+                "kotlin",
+                "rust",
+                "ocaml",
+                "c",
+                "lua",
+                "go",
+                "toml",
+                "json",
+                "yaml",
+                "python",
+                "bash",
+                "dockerfile",
+                "gleam",
+            }
+        })
     end
 }
 

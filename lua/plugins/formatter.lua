@@ -1,75 +1,27 @@
 return {
-  'mhartington/formatter.nvim',
-  config = function()
-    local util = require "formatter.util"
-    require('formatter').setup({
-      filetype = {
-        ocaml = {
-          require("formatter.filetypes.ocaml"),
-          function()
-            return {
-              exe = "ocamlformat",
-              stdin = true,
-              args = {
-                "--enable-outside-detected-project",
-                util.escape_path(util.get_current_buffer_file_name()),
-              },
-            }
-          end
-        },
-        kotlin = {
-          require('formatter.filetypes.kotlin'),
-          function()
-            return {
-              exe = "ktlint",
-              stdin = true,
-              args = {
-                "--stdin",
-                "--format",
-                "--log-level=none"
-              },
-            }
-          end
-        },
-        rust = {
-          require('formatter.filetypes.rust'),
-          function()
-            return {
-              exe = 'rustfmt',
-              stdin = true,
-              args = {
-                '--edition 2021'
-              },
-            }
-          end
-        },
-        go = {
-            require('formatter.filetypes.go'),
-            function()
-              return {
-                exe = 'gofmt',
-                stdin = true,
-                args = { '-s' },
-              }
-            end
-        },
-        toaml = {
-          require('formatter.filetypes.toml'),
-          function()
-            return {
-              exe = 'taplo',
-              stdin = true,
-              try_node_modules = true,
-              args = {
-                'fmt',
-                '--stdin-filepath',
-                util.escape_path(util.get_current_buffer_file_name()),
-                '-',
-              },
-            }
-          end
-        },
-      },
-    })
-  end
+    'mhartington/formatter.nvim',
+    keys = {
+        { "<leader>f", "<cmd>Format<cr>", desc = "Format" },
+    },
+    config = function()
+        local util = require("formatter.util")
+
+        require('formatter').setup({
+            filetype = {
+                rust = { require('formatter.filetypes.rust').rustfmt },
+                c = { require('formatter.filetypes.c').uncrustify },
+                zig = { require('formatter.filetypes.zig').zigfmt },
+                go = { require('formatter.filetypes.go').gofmt },
+                kotlin = { require('formatter.filetypes.kotlin').ktlint },
+                ocaml = { require("formatter.filetypes.ocaml").ocamlformat },
+                lua = { require('formatter.filetypes.lua').stylua },
+                sql = { require('formatter.filetypes.sql').pgformat },
+                sh = { require('formatter.filetypes.sh').shfmt },
+                json = { require('formatter.filetypes.json').jq },
+                toml = { require('formatter.filetypes.toml').taplo },
+                yaml = { require('formatter.filetypes.yaml').yamlfmt },
+                xml = { require('formatter.filetypes.xml').xmllint },
+            },
+        })
+    end
 }

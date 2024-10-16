@@ -1,20 +1,47 @@
 return {
-  "folke/trouble.nvim",
-  config = function()
-    require("trouble").setup {
-      icons = false,
-    }
-
-    local trouble = require('trouble')
-
-    vim.keymap.set("n", "<leader>xx", function() trouble.toggle() end, { desc = "trouble toggle"} )
-    vim.keymap.set("n", "<leader>xw", function() trouble.toggle("workspace_diagnostics") end, { desc = "trouble [w]orkspace diagnostics"} )
-    vim.keymap.set("n", "<leader>xd", function() trouble.toggle("document_diagnostics") end, { desc = "trouble [d]oument diagnostics"} )
-    vim.keymap.set("n", "<leader>xq", function() trouble.toggle("quickfix") end, { desc = "trouble [q]uickfix"} )
-    vim.keymap.set("n", "<leader>xl", function() trouble.toggle("loclist") end, { desc = "trouble [l]oclist"} )
-    vim.keymap.set("n", "<leader>xn", function() trouble.next({skip_groups = true, jump=true}) end, { desc = "trouble [n]ext"} )
-    vim.keymap.set("n", "<leader>xp", function() trouble.previous({skip_groups = true, jump=true}) end, { desc = "trouble [p]revious"} )
-    vim.keymap.set("n", "gR", function() trouble.toggle("lsp_references") end, { desc = "trouble [R]eference (LSP)"} )
---    vim.keymap.set("n", "<leader>xx", ":TroubleToggle<CR>", { noremap = true, silent = true })
-  end
+    "folke/trouble.nvim",
+    opts = {},
+    cmd = "Trouble",
+    keys = {
+        {
+            "<leader>xx",
+            "<cmd>Trouble diagnostics toggle<cr>",
+            desc = "Diagnostics (Trouble)"
+        },
+        {
+            "<leader>xn",
+            "<cmd>Trouble diagnostics next skip_groups=true jump=true<cr>",
+            desc = "Next (Trouble)"
+        },
+        {
+            "<leader>xp",
+            "<cmd>Trouble diagnostics prev skip_groups=true jump=true<cr>",
+            desc = "Previous (Trouble)"
+        },
+        {
+            "<leader>xQ",
+            "<cmd>Trouble qflist toggle<cr>",
+            desc = "Quickfix List (Trouble)"
+        },
+        {
+            "<leader>xX",
+            "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+            desc = "Buffer Diagnostics (Trouble)"
+        },
+        {
+            "<leader>xs",
+            "<cmd>Trouble symbols toggle focus=false<cr>",
+            desc = "Symbols (Trouble)",
+        },
+        {
+            "<leader>xl",
+            "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+            desc = "LSP Defs / refs (Trouble)",
+        },
+        {
+            "<leader>xL",
+            "<cmd>Trouble loclist toggle<cr>",
+            desc = "Location List (Trouble)",
+        },
+    },
 }
