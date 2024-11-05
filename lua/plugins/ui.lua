@@ -17,30 +17,24 @@ return {
         },
     },
 
+    ---------------------------------------------------------------------------
+    -- Show marks, jumps, and buffers
+    -----------------------------------------------------------------------------
     {
         "gcmt/vessel.nvim",
         config = function()
             require("vessel").setup({
                 create_commands = true,
-                commands = {
-                    view_marks = "Marks",
-                    view_jumps = "Jumps",
-                    view_buffers = "Buffers"
-                }
             })
-        end
+        end,
+        keys = {
+            {
+                "<leader><space>",
+                ":Jumps<cr>",
+                desc = "Show jumps"
+            },
+        }
     },
-
-    -----------------------------------------------------------------------------
-    -- Smooth scrolling
-    -----------------------------------------------------------------------------
-    -- {
-    --   "karb94/neoscroll.nvim",
-    --   event = "VeryLazy",
-    --   config = function ()
-    --     require('neoscroll').setup {}
-    --   end
-    -- },
 
     -----------------------------------------------------------------------------
     --- Show vertical indent lines

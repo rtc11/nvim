@@ -11,6 +11,9 @@ return {
             'mhartington/formatter.nvim', -- formatter
             'folke/neodev.nvim'       -- additional handy lua configs
         },
+        opts = {
+            inlay_hints = { enabled = true }
+        },
         config = function()
             local lspconfig = require('lspconfig')
             local cmp_nvim_lsp = require('cmp_nvim_lsp')
@@ -111,7 +114,7 @@ return {
                 capabilities = capabilities,
                 on_attach = on_attach,
                 -- root_dir = lspconfig.util.root_pattern("*.kt"),
-                root_dir = lspconfig.util.root_pattern("settings.gradle.kts", "buildk.toml"),
+                root_dir = lspconfig.util.root_pattern("settings.gradle.kts", "buildk.toml", "Makefile"),
                 init_options = {
                     storagePath = "/Users/robin/.config/kotlin-language-server/"
                 }

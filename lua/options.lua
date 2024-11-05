@@ -38,7 +38,6 @@ vim.opt.cursorline = true                        -- Enable highlighting of the c
 vim.opt.fileencoding = "utf-8"                   -- The encoding written to file
 vim.opt.cmdheight = 1                            -- More space for displaying messages
 vim.opt.showcmd = false                          -- Don't show extra info when using completion
-
 vim.opt.formatoptions = {
     c = true, -- auto-wrap comments using textwidth  
     o = false, -- don't continue comments

@@ -2,6 +2,7 @@ return {
 
     -----------------------------------------------------------------------------
     -- Powerful line and block-wise commenting
+    -----------------------------------------------------------------------------
     {
         'numToStr/Comment.nvim',
         event = 'VeryLazy',
@@ -21,7 +22,20 @@ return {
     },
 
     -----------------------------------------------------------------------------
+    -- Inline diagnostics
+    -----------------------------------------------------------------------------
+    {
+        "rachartier/tiny-inline-diagnostic.nvim",
+        event = "LspAttach",
+        config = function()
+            vim.diagnostic.config({ virtual_text = false})
+            require('tiny-inline-diagnostic').setup()
+        end
+    },
+
+    -----------------------------------------------------------------------------
     -- Perform diffs on blocks of code
+    -----------------------------------------------------------------------------
     {
         'AndrewRadev/linediff.vim',
         cmd = { 'Linediff', 'LinediffAdd' },
@@ -35,6 +49,7 @@ return {
 
     -----------------------------------------------------------------------------
     -- Leap through the code with s (forward seeking) or S (backward seeking)
+    -----------------------------------------------------------------------------
     {
         'ggandor/leap.nvim',
         dependencies = { 'tpope/vim-repeat' },
@@ -42,12 +57,39 @@ return {
             require('leap').add_default_mappings()
         end
     },
+
+    -----------------------------------------------------------------------------
+    -- code suggestion
+    -----------------------------------------------------------------------------
     {
         'github/copilot.vim',
         event = "VeryLazy",
     },
+
+    -----------------------------------------------------------------------------
+    -- multiple cursors
+    -----------------------------------------------------------------------------
     {
         "smoka7/multicursors.nvim",
         event = "VeryLazy",
-    }
+    },
+
+    ---------------------------------------------------------------------------
+    -- formatters
+    -----------------------------------------------------------------------------
+    {
+        'stevearc/conform.nvim',
+        opts = {
+            formatters_by_ft = {
+                lua = { "stylua" },
+                rust = { "rustfmt" },
+                go = { "gofmt" },
+                kotlin = { "ktlint" },
+            }
+        },
+        keys = {
+            { "<leader>f", function() require("conform").format({async = true}) end, desc = "Format buffer" },
+        },
+    },
 }
+
