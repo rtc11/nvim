@@ -1,4 +1,39 @@
 return {
+    -----------------------------------------------------------------------------
+    -- Gradle integration
+    -----------------------------------------------------------------------------
+    {
+        -- dir = "~/code/lua/gradle.nvim",
+        "oclay1st/gradle.nvim",
+        keys = {
+            { '<Leader>gg', ':Gradle<CR>', mode = 'n', desc = 'Gradle' }
+        },
+        opts = {
+            projects_view = {
+                position = 'left'
+            }
+        },
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+            "nvim-lua/plenary.nvim",
+        },
+    },
+
+    -----------------------------------------------------------------------------
+    -- Git integration
+    -----------------------------------------------------------------------------
+    {
+        "NeogitOrg/neogit",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "sindrets/diffview.nvim",
+            "ibhagwan/fzf-lua", -- or  "nvim-telescope/telescope.nvim",
+        },
+        config = true,
+        keys = {
+            { '<Leader>gn', ':Neogit<CR>', mode = 'n', desc = 'Neogit' },
+        }
+    },
 
     -----------------------------------------------------------------------------
     -- Powerful line and block-wise commenting
@@ -28,7 +63,7 @@ return {
         "rachartier/tiny-inline-diagnostic.nvim",
         event = "LspAttach",
         config = function()
-            vim.diagnostic.config({ virtual_text = false})
+            vim.diagnostic.config({ virtual_text = false })
             require('tiny-inline-diagnostic').setup()
         end
     },
@@ -59,14 +94,6 @@ return {
     },
 
     -----------------------------------------------------------------------------
-    -- code suggestion
-    -----------------------------------------------------------------------------
-    {
-        'github/copilot.vim',
-        event = "VeryLazy",
-    },
-
-    -----------------------------------------------------------------------------
     -- multiple cursors
     -----------------------------------------------------------------------------
     {
@@ -85,11 +112,11 @@ return {
                 rust = { "rustfmt" },
                 go = { "gofmt" },
                 kotlin = { "ktlint" },
+                scala = { "scalafmt" }
             }
         },
         keys = {
-            { "<leader>f", function() require("conform").format({async = true}) end, desc = "Format buffer" },
+            { "<leader>f", function() require("conform").format({ async = true }) end, desc = "Format buffer" },
         },
     },
 }
-

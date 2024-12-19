@@ -1,6 +1,41 @@
 return {
 
     ---------------------------------------------------------------------------
+    -- Show git blame
+    -----------------------------------------------------------------------------
+    {
+        "FabijanZulj/blame.nvim",
+        lazy = false,
+        config = function()
+            require('blame').setup {}
+        end,
+        opts = {
+            blame_options = { '-w' }
+        },
+        keys = {
+            { '<Leader>gb', ':BlameToggle<CR>', mode = 'n', desc = 'Neogit' },
+        }
+    },
+    ---------------------------------------------------------------------------
+    -- Show marks in the sign column
+    -----------------------------------------------------------------------------
+    {
+        "chentoast/marks.nvim",
+        event = "VeryLazy",
+        opts = {
+            default_mappings = false,
+        },
+    },
+    ---------------------------------------------------------------------------
+    -- Highlight rgb/hsl colors
+    -----------------------------------------------------------------------------
+    {
+        'brenoprata10/nvim-highlight-colors',
+        config = function()
+            require('nvim-highlight-colors').setup({})
+        end
+    },
+    ---------------------------------------------------------------------------
     -- File browser
     -----------------------------------------------------------------------------
     {
@@ -20,21 +55,21 @@ return {
     ---------------------------------------------------------------------------
     -- Show marks, jumps, and buffers
     -----------------------------------------------------------------------------
-    {
-        "gcmt/vessel.nvim",
-        config = function()
-            require("vessel").setup({
-                create_commands = true,
-            })
-        end,
-        keys = {
-            {
-                "<leader><space>",
-                ":Jumps<cr>",
-                desc = "Show jumps"
-            },
-        }
-    },
+    -- {
+    --     "gcmt/vessel.nvim",
+    --     config = function()
+    --         require("vessel").setup({
+    --             create_commands = true,
+    --         })
+    --     end,
+    --     keys = {
+    --         {
+    --             "<leader><space>",
+    --             ":Jumps<cr>",
+    --             desc = "Show jumps"
+    --         },
+    --     }
+    -- },
 
     -----------------------------------------------------------------------------
     --- Show vertical indent lines
@@ -54,15 +89,15 @@ return {
     -----------------------------------------------------------------------------
     --- Smooth scrolling
     -----------------------------------------------------------------------------
-    {
-        'declancm/cinnamon.nvim',
-        opts = {
-            keymaps = {
-                basic = true,
-                extra = true,
-            }
-        },
-    },
+    -- {
+    --     'declancm/cinnamon.nvim',
+    --     opts = {
+    --         keymaps = {
+    --             basic = true,
+    --             extra = true,
+    --         }
+    --     },
+    -- },
 
     -----------------------------------------------------------------------------
     --- UI hooks for vim.ui.select and vim.ui.input

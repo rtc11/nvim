@@ -14,8 +14,8 @@ return {
         require("neotest").setup({
             adapters = {
                 require("neotest-rust"),
-                -- require("neotest-gradle"),
-                require("neotest-klib")
+                require("neotest-gradle"),
+                -- require("neotest-klib")
             },
         })
 

@@ -35,13 +35,12 @@ return {
                 nmap('<leader>rn', vim.lsp.buf.rename, 'Rename')
                 nmap('<leader>ca', vim.lsp.buf.code_action, 'Code actions')
                 nmap('gd', vim.lsp.buf.definition, 'Goto definition')
-                nmap('gr', require('telescope.builtin').lsp_references, 'Goto references')
+                nmap('gr', vim.lsp.buf.references, 'Goto references')
                 nmap('gI', vim.lsp.buf.implementation, 'Goto implementation')
                 nmap('<leader>D', vim.lsp.buf.type_definition, 'Type definition')
-                nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, 'Document symbols')
-                nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Workspace symbols')
+                nmap('gO', vim.lsp.buf.document_symbol, 'Goto document symbols')
                 nmap('K', vim.lsp.buf.hover, 'Hover documentation')
-                imap('<C-k>', vim.lsp.buf.signature_help, 'Signature documentation') -- <C-k> reserved for harpoon
+                imap('<C-k>', vim.lsp.buf.signature_help, 'Signature documentation')
                 nmap('gD', vim.lsp.buf.declaration, 'Goto declaration')
                 nmap('<leader>f', ':Format<CR>', 'Format code')
                 nmap('<leader>F', ':FormatWrite<CR>', 'Format code')
@@ -63,19 +62,6 @@ return {
                 vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
             end
 
-            lspconfig['lua_ls'].setup({
-                capabilities = capabilities,
-                on_attach = on_attach,
-                settings = {
-                    Lua = {
-                        diagnostics = {
-                            globals = { 'vim' }
-                        },
-                        telemetry = { enable = false },
-                    }
-                }
-            })
-
             lspconfig['rust_analyzer'].setup({
                 capabilities = capabilities,
                 on_attach = on_attach,
@@ -88,12 +74,24 @@ return {
                     }
                 }
             })
-
+            lspconfig['kotlin_language_server'].setup({
+                capabilities = capabilities,
+                on_attach = on_attach,
+                root_dir = lspconfig.util.root_pattern("settings.gradle.kts", "buildk.toml", "Makefile"),
+                cmd = { '/Users/robin/code/kotlin/kotlin-language-server/server/build/install/server/bin/kotlin-language-server' },
+                init_options = {
+                    storagePath = "/Users/robin/.config/kotlin-language-server/"
+                },
+                settings = {
+                    kotlin = {
+                        compiler = { jvm = { target = "21" } }
+                    }
+                }
+            })
             lspconfig['gopls'].setup({
                 capabilities = capabilities,
                 on_attach = on_attach,
             })
-
             lspconfig['clangd'].setup({
                 capabilities = capabilities,
                 on_attach = on_attach,
@@ -104,26 +102,41 @@ return {
                     "*.h"
                 ),
             })
-
+            lspconfig['metals'].setup({
+                capabilities = capabilities,
+                on_attach = on_attach,
+                filetypes = { "scala", "mill" }
+            })
+            lspconfig['lua_ls'].setup({
+                capabilities = capabilities,
+                on_attach = on_attach,
+                settings = {
+                    Lua = {
+                        diagnostics = {
+                            globals = { 'vim' }
+                        },
+                        telemetry = { enable = false },
+                    }
+                }
+            })
             lspconfig['ocamllsp'].setup({
                 capabilities = capabilities,
                 on_attach = on_attach
             })
-
-            lspconfig['kotlin_language_server'].setup({
-                capabilities = capabilities,
-                on_attach = on_attach,
-                -- root_dir = lspconfig.util.root_pattern("*.kt"),
-                root_dir = lspconfig.util.root_pattern("settings.gradle.kts", "buildk.toml", "Makefile"),
-                init_options = {
-                    storagePath = "/Users/robin/.config/kotlin-language-server/"
-                }
-            })
-
             lspconfig['gleam'].setup({
                 capabilities = capabilities,
                 on_attach = on_attach,
                 root_dir = lspconfig.util.root_pattern("gleam.toml"),
+            })
+            lspconfig['c3_lsp'].setup({
+                capabilities = capabilities,
+                on_attach = on_attach,
+                root_dir = lspconfig.util.root_pattern(
+                    ".git",
+                    "*.c3",
+                    "project.json",
+                    "manifest.json"
+                ),
             })
         end
     },
@@ -157,7 +170,7 @@ return {
                     "ocamllsp",
                     "kotlin_language_server",
                     "gopls",
-                    "clangd"
+                    "clangd",
                     --                "gleam",
                 },
 
