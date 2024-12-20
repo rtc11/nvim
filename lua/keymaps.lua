@@ -21,6 +21,8 @@ vim.keymap.set({'n', 'o', 'x'}, '<s-l>', 'g_', opts)        -- move to start of 
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
+vim.keymap.set('n', "<leader>R", "<cmd>.lua<CR>", { desc = "[R]un the current line" })
+
 -- search
 vim.keymap.set('n', 'n', 'nzz', opts)
 vim.keymap.set('n', 'N', 'Nzz', opts)
