@@ -31,8 +31,8 @@ vim.keymap.set('n', '*', '*zz', opts)
 -- stay in indent mode (todo: use <Tab> and <s>-<Tab> if possible)
 vim.keymap.set('v', '<s-TAB>', '<gv', opts)
 vim.keymap.set('v', '<TAB>', '>gv', opts)
-
 vim.keymap.set('i', '<s-TAB>', '<C-d>', opts)
+-- vim.keymap.set('i', '<TAB>', '<C-t>', opts)
 
 -- when yanking a word, you can replace word under cursor [vep]
 vim.keymap.set('x', 'p', [["_dP]])

@@ -15,9 +15,14 @@ return {
             },
             {
                 "<leader><space>",
-                ":Jumps<cr>",
-                desc = "Show jumps"
+                ":Buf<cr>",
+                desc = "Show buffers"
             },
+            -- {
+            --     "<leader><space>",
+            --     ":Jumps<cr>",
+            --     desc = "Show jumps"
+            -- },
         }
     },
 }

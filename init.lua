@@ -16,8 +16,19 @@ require("options")
 require("lazy").setup("plugins")
 require("keymaps")
 
-vim.cmd.colorscheme "monocle"
--- vim.cmd.colorscheme "rtc11"
+
+vim.cmd.colorscheme("base2tone_field_dark")
+local c = require('base2tone_field_dark.palette')
+local hl = vim.api.nvim_set_hl
+hl(0, "Normal", { fg = c.B2T_B5, bg = 'NONE',  })
+hl(0, "NormalNC", { fg = c.B2T_B5, bg = 'NONE',  })
+hl(0, "NormalSB", { fg = c.B2T_B5, bg = 'NONE',  })
+hl(0, "LineNr", { fg = c.B2T_A2, bg = 'NONE' })
+
+-- vim.cmd.colorscheme("ashen")
+-- vim.cmd.colorscheme("lackluster-mint")
+-- vim.cmd.colorscheme("monocle")
+-- vim.cmd.colorscheme("rtc11")
 
 vim.filetype.add({
   extension = {

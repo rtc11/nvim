@@ -87,35 +87,18 @@ return {
     },
 
     -----------------------------------------------------------------------------
-    --- Smooth scrolling
-    -----------------------------------------------------------------------------
-    -- {
-    --     'declancm/cinnamon.nvim',
-    --     opts = {
-    --         keymaps = {
-    --             basic = true,
-    --             extra = true,
-    --         }
-    --     },
-    -- },
-
-    -----------------------------------------------------------------------------
-    --- UI hooks for vim.ui.select and vim.ui.input
-    -----------------------------------------------------------------------------
-    -- {
-    --     'stevearc/dressing.nvim',
-    --     event = "VeryLazy"
-    -- },
-
-    -----------------------------------------------------------------------------
     --- Status line
     -----------------------------------------------------------------------------
     {
         'nvim-lualine/lualine.nvim',
+        dependencies = {
+            -- "ficcdaf/ashen.nvim",
+        },
         event = "VeryLazy",
         opts = {
             options = {
-                theme                = "custom",
+                -- theme                = require("ashen.plugins.lualine").theme,
+                -- theme                = "custom",
                 component_separators = { left = " ", right = " " },
                 section_separators   = { left = " ", right = " " },
                 globalstatus         = true,
@@ -137,6 +120,6 @@ return {
                 lualine_y = {},
                 lualine_z = {},
             },
-        }
+        },
     },
 }

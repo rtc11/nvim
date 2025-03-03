@@ -6,17 +6,44 @@ return {
         'neovim/nvim-lspconfig',
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
-            'hrsh7th/cmp-nvim-lsp',
-            { 'antosha417/nvim-lsp-file-operations', config = true },
+            -- 'hrsh7th/cmp-nvim-lsp',
+            'saghen/blink.cmp',
+            -- { 'antosha417/nvim-lsp-file-operations', config = true },
             'mhartington/formatter.nvim', -- formatter
-            'folke/neodev.nvim'       -- additional handy lua configs
+            -- 'folke/neodev.nvim'       -- additional handy lua configs
         },
         opts = {
-            inlay_hints = { enabled = true }
+            inlay_hints = { enabled = true },
+            servers = {
+                kotlin_language_server = {
+                    -- root_dir = require('lspconfig').util.root_pattern("settings.gradle.kts", "buildk.toml", "Makefile"),
+                    cmd = { '/Users/robin/code/kotlin/kotlin-language-server/server/build/install/server/bin/kotlin-language-server' },
+                    init_options = {
+                        storagePath = "/Users/robin/.config/kotlin-language-server/"
+                    },
+                    settings = {
+                        kotlin = { compiler = { jvm = { target = "21" } } }
+                    },
+                },
+                rust_analyzer = {
+                    checkOnSave = { enable = true, command = 'clippy' }
+                },
+                -- c3_lsp = {},
+                clangd = {
+                    -- root_dir = require('lspconfig').util.root_pattern( ".git", "Makefile", "*.c", "*.h") 
+                },
+                metals = {
+                    filetypes = { "scala", "mill" }
+                },
+                lua_ls = {},
+                ocamllsp = {},
+                gleam = {},
+                gopls = {},
+            },
         },
-        config = function()
+        config = function(_, opts)
             local lspconfig = require('lspconfig')
-            local cmp_nvim_lsp = require('cmp_nvim_lsp')
+
 
             local on_attach = function(_, bufnr)
                 local nmap = function(keys, func, desc)
@@ -42,8 +69,8 @@ return {
                 nmap('K', vim.lsp.buf.hover, 'Hover documentation')
                 imap('<C-k>', vim.lsp.buf.signature_help, 'Signature documentation')
                 nmap('gD', vim.lsp.buf.declaration, 'Goto declaration')
-                nmap('<leader>f', ':Format<CR>', 'Format code')
-                nmap('<leader>F', ':FormatWrite<CR>', 'Format code')
+                -- nmap('<leader>f', ':Format<CR>', 'Format code')
+                -- nmap('<leader>F', ':FormatWrite<CR>', 'Format code')
                 nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, 'Workspace add folder')
                 nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, 'Workspace remove folder')
                 nmap('<leader>wl', function()
@@ -55,95 +82,99 @@ return {
                 end, { desc = 'Format current buffer with LSP' })
             end
 
-            local capabilities = cmp_nvim_lsp.default_capabilities()
             local signs = { Error = '⊗ ', Warn = '⊕ ', Hint = '⨺ ', Info = 'ℹ︎ ' }
             for type, icon in pairs(signs) do
                 local hl = 'DiagnosticSign' .. type
                 vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
             end
 
-            lspconfig['rust_analyzer'].setup({
-                capabilities = capabilities,
-                on_attach = on_attach,
-                settings = {
-                    ["rust-analyser"] = {
-                        checkOnSave = {
-                            enable = true,
-                            command = 'clippy'
-                        },
-                    }
-                }
-            })
-            lspconfig['kotlin_language_server'].setup({
-                capabilities = capabilities,
-                on_attach = on_attach,
-                root_dir = lspconfig.util.root_pattern("settings.gradle.kts", "buildk.toml", "Makefile"),
-                cmd = { '/Users/robin/code/kotlin/kotlin-language-server/server/build/install/server/bin/kotlin-language-server' },
-                init_options = {
-                    storagePath = "/Users/robin/.config/kotlin-language-server/"
-                },
-                settings = {
-                    kotlin = {
-                        compiler = { jvm = { target = "21" } }
-                    }
-                }
-            })
-            lspconfig['gopls'].setup({
-                capabilities = capabilities,
-                on_attach = on_attach,
-            })
-            lspconfig['clangd'].setup({
-                capabilities = capabilities,
-                on_attach = on_attach,
-                root_dir = lspconfig.util.root_pattern(
-                    ".git",
-                    "Makefile",
-                    "*.c",
-                    "*.h"
-                ),
-            })
-            lspconfig['metals'].setup({
-                capabilities = capabilities,
-                on_attach = on_attach,
-                filetypes = { "scala", "mill" }
-            })
-            lspconfig['lua_ls'].setup({
-                capabilities = capabilities,
-                on_attach = on_attach,
-                settings = {
-                    Lua = {
-                        diagnostics = {
-                            globals = { 'vim' }
-                        },
-                        telemetry = { enable = false },
-                    }
-                }
-            })
-            lspconfig['ocamllsp'].setup({
-                capabilities = capabilities,
-                on_attach = on_attach
-            })
-            lspconfig['gleam'].setup({
-                capabilities = capabilities,
-                on_attach = on_attach,
-                root_dir = lspconfig.util.root_pattern("gleam.toml"),
-            })
-            lspconfig['c3_lsp'].setup({
-                capabilities = capabilities,
-                on_attach = on_attach,
-                root_dir = lspconfig.util.root_pattern(
-                    ".git",
-                    "*.c3",
-                    "project.json",
-                    "manifest.json"
-                ),
-            })
+            for server, config in pairs(opts.servers) do
+                config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
+                config.on_attach = on_attach
+                lspconfig[server].setup(config)
+            end
+            -- lspconfig['rust_analyzer'].setup({
+            --     capabilities = capabilities,
+            --     on_attach = on_attach,
+            --     settings = {
+            --         ["rust-analyser"] = {
+            --             checkOnSave = {
+            --                 enable = true,
+            --                 command = 'clippy'
+            --             },
+            --         }
+            --     }
+            -- })
+            -- lspconfig['kotlin_language_server'].setup({
+            --     capabilities = capabilities,
+            --     on_attach = on_attach,
+            --     root_dir = lspconfig.util.root_pattern("settings.gradle.kts", "buildk.toml", "Makefile"),
+            --     cmd = { '/Users/robin/code/kotlin/kotlin-language-server/server/build/install/server/bin/kotlin-language-server' },
+            --     init_options = {
+            --         storagePath = "/Users/robin/.config/kotlin-language-server/"
+            --     },
+            --     settings = {
+            --         kotlin = {
+            --             compiler = { jvm = { target = "21" } }
+            --         }
+            --     }
+            -- })
+            -- lspconfig['gopls'].setup({
+            --     capabilities = capabilities,
+            --     on_attach = on_attach,
+            -- })
+            -- lspconfig['clangd'].setup({
+            --     capabilities = capabilities,
+            --     on_attach = on_attach,
+            --     root_dir = lspconfig.util.root_pattern(
+            --         ".git",
+            --         "Makefile",
+            --         "*.c",
+            --         "*.h"
+            --     ),
+            -- })
+            -- lspconfig['metals'].setup({
+            --     capabilities = capabilities,
+            --     on_attach = on_attach,
+            --     filetypes = { "scala", "mill" }
+            -- })
+            -- lspconfig['lua_ls'].setup({
+            --     capabilities = capabilities,
+            --     on_attach = on_attach,
+            --     settings = {
+            --         Lua = {
+            --             diagnostics = {
+            --                 globals = { 'vim' }
+            --             },
+            --             telemetry = { enable = false },
+            --         }
+            --     }
+            -- })
+            -- lspconfig['ocamllsp'].setup({
+            --     capabilities = capabilities,
+            --     on_attach = on_attach
+            -- })
+            -- lspconfig['gleam'].setup({
+            --     capabilities = capabilities,
+            --     on_attach = on_attach,
+            --     root_dir = lspconfig.util.root_pattern("gleam.toml"),
+            -- })
+            -- lspconfig['c3_lsp'].setup({
+            --     capabilities = capabilities,
+            --     on_attach = on_attach,
+            --     root_dir = lspconfig.util.root_pattern(
+            --         ".git",
+            --         "*.c3",
+            --         "project.json",
+            --         "manifest.json"
+            --     ),
+            -- })
         end
     },
 
-    -----------------------------------------------------------------------------
-    --- Package manager
-    -----------------------------------------------------------------------------
+    -- -----------------------------------------------------------------------------
+    -- --- Package manager
+    -- -----------------------------------------------------------------------------
     {
         'williamboman/mason.nvim',
         dependencies = {
@@ -167,14 +198,7 @@ return {
                 ensure_installed = {
                     "lua_ls",
                     "rust_analyzer",
-                    "ocamllsp",
-                    "kotlin_language_server",
-                    "gopls",
-                    "clangd",
-                    --                "gleam",
                 },
-
-                --            automatic_installation = true,
             })
         end
     }

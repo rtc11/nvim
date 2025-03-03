@@ -51,8 +51,8 @@ return {
         "nvim-treesitter/nvim-treesitter-context", -- Optional: For better context display
     },
     {
-        "nvim-treesitter/nvim-treesitter-context", -- Optional: For better context display
-    },
+        "nvim-treesitter/nvim-treesitter-refactor", -- Optional: For code refactoring features,
+    }
 }
 
 -- If syntax highlighting is disabled, you can enable it with:

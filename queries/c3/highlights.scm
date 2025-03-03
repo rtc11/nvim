@@ -320,4 +320,13 @@
   (block_comment)
 ] @comment @spell
 
-(doc_comment) @comment.documentation @spell
+(doc_comment) @comment.documentation
+(doc_comment_text) @spell
+(doc_comment_contract name: (_) @markup.strong
+                      (#any-of? @markup.strong
+                                "@param"
+                                "@return"
+                                "@deprecated"
+                                "@require"
+                                "@ensure"
+                                "@pure"))

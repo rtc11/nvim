@@ -16,8 +16,11 @@ vim.opt.cursorcolumn = false                        -- Enable highlighting of th
 vim.opt.cursorline = true                           -- Enable highlighting of the current line
 vim.opt.expandtab = true                            -- expand <tab> to spaces in INSERT mode
 vim.opt.fileencoding = "utf-8"                      -- The encoding written to file
-vim.opt.formatoptions = "jcroqlnt"                  -- tcqj
+-- vim.opt.formatoptions = "jcroqlnt"                  -- tcqj
+vim.opt.formatoptions:remove "o"
 vim.opt.grepprg = "rg --vimgrep"
+vim.opt.shada = { "'10", "<0", "s10", "h" }         -- save buffers, marks, registers, etc between sessions per project
+vim.opt.swapfile = false                            -- temp save buffers
 vim.opt.guicursor = ""                              -- "a:blinkon0"
 vim.opt.guifont = "monospace:h17"
 vim.opt.hlsearch = true                             -- set highlight on search

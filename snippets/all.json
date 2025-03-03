@@ -1,0 +1,11 @@
+{
+    "co": {
+        "body": [
+            "Co-authored-by: stephen ramthun <stephen.ramthun@nav.no>",
+            "Co-authored-by: Jørgen Nyborg-Christensen <jorgen.nyborg-christensen@nav.no>",
+            "Co-authored-by: anders skifte <anders.skifte@nav.no>"
+        ],
+        "prefix": "co"
+    }
+}
+
