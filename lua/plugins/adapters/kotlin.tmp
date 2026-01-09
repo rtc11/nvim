@@ -1,0 +1,69 @@
+
+        -- dap.defaults.kotlin.auto_continue_if_many_stopped = false
+        -- dap.set_log_level("TRACE")
+
+        dap.adapters.kotlin = {
+            type = "executable",
+            command = "/Users/Robin.Tordly/code/kotlin/kotlin-language-server/adapter/build/install/adapter/bin/kotlin-debug-adapter",
+            options = { auto_continue_if_many_stopped = false },
+        }
+
+        dap.configurations.kotlin = {
+            {
+                -- Use this for unit tests, first run `g --info cleanTest test --debug-jvm` then attach the debugger
+                type = "kotlin",
+                request = "attach",
+                name = "Attach",
+                port = 5005,
+                args = {},
+                projectRoot = "${workspaceFolder}",
+                -- projectRoot = vim.fn.getcwd(),
+                classPaths = {
+                    "apps/abetal/build/classes/kotlin/main",
+                },
+                hostName = "localhost",
+                timeout = 2000,
+            },
+        }
+
+
+        -- dap.adapters.kotlin = {
+        --     type = "executable",
+        --     command = "/Users/Robin.Tordly/code/kotlin/kotlin-language-server/adapter/build/install/adapter/bin/kotlin-debug-adapter",
+        --     -- command = "kotlin-debug-adapter",
+        --     options = {
+        --         initialize_timeout_sec = 15,
+        --         disconnect_timeout_sec = 15,
+        --         auto_continue_if_many_stopped = false,
+        --     },
+        -- }
+
+        -- dap.configurations.kotlin = {
+        --     {
+        --         -- first run g --info cleanTest test --debug-jvm
+        --         -- then attach the debugger to it
+        --         name = "attach debugger",
+        --         type = "kotlin",
+        --         request = "attach",
+        --         hostName = "127.0.0.1",
+        --         port = 5005,
+        --         -- projectRoot = vim.fn.getcwd,
+        --         projectRoot = util.root_pattern("settings.gradle.kts")(vim.fn.fnamemodify(vim.fn.expand("%"), ":p:h")),
+        --         timeout = 20,
+        --     },
+        --     {
+        --         name = "All tests",
+        --         type = "kotlin",
+        --         request = "launch",
+        --         mainClass = "org.junit.platform.console.ConsoleLauncher --scan-class-path",
+        --         projectRoot = util.root_pattern("settings.gradle.kts")(vim.fn.fnamemodify(vim.fn.expand("%"), ":p:h")),
+        --     },
+        --     {
+        --         -- main
+        --         name= "utsjekk.AppKt",
+        --         type = "kotlin",
+        --         request = "launch",
+        --         mainClass = "utsjekk.AppKt",
+        --         projectRoot = util.root_pattern("settings.gradle.kts")(vim.fn.fnamemodify(vim.fn.expand("%"), ":p:h")),
+        --     },
+        -- }

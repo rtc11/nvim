@@ -1,0 +1,11 @@
+# diff split windows
+:windo diffthis
+:diffoff!
+
+# make
+:set makeprg=cargo\ build
+<leader>r
+
+# format buffer with external tool
+:%!jq
+:%!xmllint --format %
