@@ -9,6 +9,7 @@ if not vim.loop.fs_stat(lazypath) then
     lazypath,
   }
 end
+
 vim.opt.rtp:prepend(lazypath)
 vim.opt.rtp:prepend("/opt/homebrew/bin/fzf")
 
@@ -18,7 +19,15 @@ if vim.treesitter.language.ft_to_lang == nil then
 end
 
 require("options")
-require("lazy").setup("plugins")
+-- require("lazy").setup("plugins")
+require("lazy").setup({
+  spec = {
+    { import = "plugins" },
+  },
+  change_detection = {
+    notify = false, -- notify when changes are found
+  },
+})
 require("keymaps")
 
 vim.cmd.colorscheme "ashen"
@@ -26,9 +35,7 @@ vim.cmd.colorscheme "ashen"
 vim.filetype.add({
   extension = {
     ty = "ty",
-
     cbl = "cobol",
-
     js = "js",
     ts = "js",
     tsx = "js",
@@ -47,45 +54,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
   group = highlight_group,
   pattern = '*',
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "cobol",
-  callback = function()
-    vim.b.cobol_format_free = 1
-  end,
-  desc = "Enable Free Format COBOL Syntax",
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "c3",
-  callback = function()
-    vim.opt_local.errorformat = "%E(%f:%l:%c) Error: %m,%Z%.%#,%C%.%#"
-    vim.opt_local.makeprg = "c3c build"
-  end,
-  desc = "Set error format and makeprg for c3"
-})
-
--- makeprg for kotlin
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "kotlin",
-  callback = function()
-    -- gradle error format
-    local kotlin_patterns = {
-      [[%t: file://%f:%l:%c %m]], -- match e: file://path/file.kt:34:24 message
-    }
-    vim.opt_local.errorformat = table.concat(kotlin_patterns, ',') 
-
-    -- set makeprg=
-    local cwd = vim.fn.expand("%:p:h")
-    if vim.fn.filereadable(cwd .. "/build.gradle.kts") then
-      vim.opt_local.makeprg = "./gradlew build"
-    -- elseif vim.fn.executable(cwd .. "/nob") == 1 then
-      -- vim.opt_local.makeprg  = "./nob"
-    -- else
-      -- vim.opt_local.makeprg = "./gradlew build"
-    end
-  end
 })
 
 -- The line beneath this is called `modeline`. See `:help modeline`

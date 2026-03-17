@@ -15,13 +15,14 @@ return {
     {
         "saghen/blink.cmp",
         dependencies = "rafamadriz/friendly-snippets",
-        version = "1.1.0",
+        version = "1.*",
         opts = {
             keymap = {
                 preset = "none",
                 ["<C-j>"] = { "select_next", "fallback" },
                 ["<C-k>"] = { "select_prev", "fallback" },
-                ["<TAB>"] = { "accept" },
+                ["<TAB>"] = { "accept", "fallback" },
+                ["<CR>"] = { "accept", "fallback" },
             },
 
             appearance = {

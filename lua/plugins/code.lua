@@ -92,7 +92,7 @@ return {
         },
     },
     -----------------------------------------------------------------------------
-    -- Perform diffs on blocks of code
+    -- Persorm diffs on blocks of code
     -----------------------------------------------------------------------------
     {
         "AndrewRadev/linediff.vim",
@@ -110,16 +110,20 @@ return {
     {
         "ggandor/leap.nvim",
         dependencies = { "tpope/vim-repeat" },
-        config = function()
-            require("leap").add_default_mappings()
-        end
+        keys = {
+            { "s", "<Plug>(leap)", mode = "n", desc = "leap forward"},
+            { "S", "<Plug>(leap-from-window)", mode = "n", desc = "leap windows"},
+        },
     },
     -----------------------------------------------------------------------------
     -- multiple cursors
     -----------------------------------------------------------------------------
+    -- {
+    --     "smoka7/multicursors.nvim",
+    --     event = "VeryLazy",
+    -- },
     {
-        "smoka7/multicursors.nvim",
-        event = "VeryLazy",
+        "mg979/vim-visual-multi",
     },
     ---------------------------------------------------------------------------
     -- formatters
@@ -131,9 +135,14 @@ return {
                 lua = { "stylua" },
                 rust = { "rustfmt" },
                 go = { "gofmt" },
-                -- kotlin = { "ktlint" },
-                kotlin = { "ktfmt" },
+                kotlin = { "ktlint" },
+                -- kotlin = { "ktfmt" },
                 scala = { "scalafmt" }
+            },
+            formatters = {
+                ktfmt = {
+                    args = { "--kotlinlang-style", "-" }
+                }
             }
         },
         keys = {

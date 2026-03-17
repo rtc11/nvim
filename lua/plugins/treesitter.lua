@@ -11,11 +11,19 @@ return {
                     local filetype = args.match
                     local lang = vim.treesitter.language.get_lang(filetype)
                     if not vim.tbl_contains(require("nvim-treesitter.config").get_available(), lang) then return end
+
                     require("nvim-treesitter").install(lang):await(function()
                         vim.wo.foldlevel = 20
                         vim.wo.foldmethod = 'expr'
                         vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-                        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+
+                        if filetype ~= "kotlin" then
+                            vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                        else
+                            vim.bo.indentexpr = ""
+                            vim.bo.smartindent = true
+                        end
+
                         vim.treesitter.start()
                     end)
                 end,
