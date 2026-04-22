@@ -8,7 +8,7 @@ local opts = { noremap = true, silent = true }
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', opts)
 
 vim.keymap.set('n', '<leader>.', ':cd %:p:h<CR>',  { desc = 'set current working directory' })
-vim.keymap.set('n', '<leader>r', ':update<CR> :make<CR>', { desc = 'update and make' })
+vim.keymap.set('n', '<leader><CR>', ':update<CR> :make<CR>', { desc = 'update and make' })
 
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", opts)          -- move selected (v mode) down
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", opts)          -- move selected (v mode) up
@@ -53,4 +53,12 @@ vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "goto references" })
 vim.keymap.set("n", "gI", vim.lsp.buf.implementation, { desc = "goto implementation" })
 vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "goto declaration" })
 vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "signature documentation" })
-
+vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "rename symbol" })
+vim.keymap.set("n", "<leader>ds", vim.lsp.buf.document_symbol, { desc = "document symbols" })
+vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, { desc = "goto type definition" })
+vim.keymap.set("n", "<leader>ci", vim.lsp.buf.incoming_calls, { desc = "Incoming calls" })
+vim.keymap.set("n", "<leader>co", vim.lsp.buf.outgoing_calls, { desc = "Outgoing calls" })
+vim.keymap.set('n', '<leader>tH', function() vim.lsp.buf.typehierarchy("supertypes") end)
+vim.keymap.set('n', '<leader>th', function() vim.lsp.buf.typehierarchy("subtypes") end)
+vim.keymap.set("v", "<leader>f", function() vim.lsp.buf.format({ async = true }) end, { desc = "LSP format selection" })
+vim.keymap.set("n", "<leader>cl", vim.lsp.codelens.run, { desc = "Run code lens" })

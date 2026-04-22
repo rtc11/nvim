@@ -1,5 +1,5 @@
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
   vim.fn.system {
     'git',
     'clone',
@@ -13,11 +13,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 vim.opt.rtp:prepend("/opt/homebrew/bin/fzf")
 
--- temporary fix to support the new treesitter in telescope
-if vim.treesitter.language.ft_to_lang == nil then
-  vim.treesitter.language.ft_to_lang = vim.treesitter.language.get_lang
-end
-
 require("options")
 -- require("lazy").setup("plugins")
 require("lazy").setup({
@@ -26,6 +21,9 @@ require("lazy").setup({
   },
   change_detection = {
     notify = false, -- notify when changes are found
+  },
+  rocks = {
+    enabled = false,
   },
 })
 require("keymaps")
@@ -36,13 +34,11 @@ vim.filetype.add({
   extension = {
     ty = "ty",
     cbl = "cobol",
-    js = "js",
-    ts = "js",
-    tsx = "js",
   }
 })
 
-vim.lsp.enable("kotlin_lsp")
+-- vim.lsp.enable("kotlin_lsp")
+vim.lsp.enable("kls")
 vim.lsp.enable("rust_analyzer")
 vim.lsp.enable("c3lsp")
 -- vim.lsp.enable("cobol")

@@ -8,7 +8,7 @@ return {
 			{ "<leader>dq", "<cmd>DapTerminate<CR>", desc = "DAP: terminate" },
 			{ "<leader>du", "<cmd>lua require('dap').up()<CR>", desc = "DAP: Go up in call stack" },
 			{ "<leader>dd", "<cmd>lua require('dap').down()<CR>", desc = "DAP: Go down in call stack" },
-			{ "<leader>ds", "<cmd>lua require('dapui').toggle()<CR>", desc = "DAP: Toggle ui" },
+			{ "<leader>dx", "<cmd>lua require('dapui').toggle()<CR>", desc = "DAP: Toggle ui" },
 			{ '<leader>do', "<cmd>DapStepOver<CR>", desc = "DAP: step over" },
 			{ '<leader>di', "<cmd>DapStepInto<CR>", desc = "DAP: step into" },
 			{ '<leader>dO', "<cmd>DapStepOut<CR>", desc = "DAP: step out" },
@@ -19,8 +19,9 @@ return {
 			local dap = require("dap")
 			local dapui = require("dapui")
 
-            dap.listeners.before.attach.dapui_config = function() dapui.open() end
-            dap.listeners.before.launch.dapui_config = function() dapui.open() end
+			dap.set_log_level("TRACE")
+
+            dap.listeners.after.event_stopped.dapui_config = function() dapui.open() end
             dap.listeners.before.event_terminated.dapui_config = function() dapui.close() end
             dap.listeners.before.event_exited.dapui_config = function() dapui.close() end
 

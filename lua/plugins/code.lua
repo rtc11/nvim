@@ -135,8 +135,7 @@ return {
                 lua = { "stylua" },
                 rust = { "rustfmt" },
                 go = { "gofmt" },
-                kotlin = { "ktlint" },
-                -- kotlin = { "ktfmt" },
+                -- kotlin = { "ktlint" },
                 scala = { "scalafmt" }
             },
             formatters = {

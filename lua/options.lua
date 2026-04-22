@@ -1,5 +1,9 @@
 vim.g.mapleader = ' '                               -- use <space> as leader key
 vim.g.maplocalleader = ' '                          -- use <space> as local leader key
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_node_provider = 0
 
 vim.wo.number = true                                -- Make line numbers default
 vim.wo.relativenumber = true                        -- show relative numbers
