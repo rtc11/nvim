@@ -19,7 +19,7 @@ return {
         require('ansi').setup({
           auto_enable = true,
           filetypes = { 'qf' },
-          theme = 'gruvbox'
+          theme = 'terminal'
         })
       end
     },

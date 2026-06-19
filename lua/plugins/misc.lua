@@ -26,8 +26,18 @@ return {
     -----------------------------------------------------------------------------
     {
         "folke/todo-comments.nvim",
+        event = { "BufReadPost", "BufNewFile" },
         dependencies = { "nvim-lua/plenary.nvim" },
-        opts = {}
+        opts = {
+            keywords = {
+                TODO = { icon = " ", color = "#4A8B8B" },
+            },
+        },
+        keys = {
+            {
+                "<leader>tt", ":TodoFzfLua<CR>", desc = "Todo fzf",
+            }
+        }
     },
     ---------------------------------------------------------------------------
     -- Which key

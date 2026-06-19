@@ -37,8 +37,8 @@ vim.filetype.add({
   }
 })
 
--- vim.lsp.enable("kotlin_lsp")
-vim.lsp.enable("kls")
+vim.lsp.enable("kotlin_lsp")
+-- vim.lsp.enable("kls")
 vim.lsp.enable("rust_analyzer")
 vim.lsp.enable("c3lsp")
 -- vim.lsp.enable("cobol")

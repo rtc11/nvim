@@ -8,7 +8,7 @@ local opts = { noremap = true, silent = true }
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', opts)
 
 vim.keymap.set('n', '<leader>.', ':cd %:p:h<CR>',  { desc = 'set current working directory' })
-vim.keymap.set('n', '<leader><CR>', ':update<CR> :make<CR>', { desc = 'update and make' })
+vim.keymap.set('n', '<leader><CR>', '<Cmd>update<CR><Cmd>make<CR>', { desc = 'update and make' })
 
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", opts)          -- move selected (v mode) down
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", opts)          -- move selected (v mode) up
